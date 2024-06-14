@@ -31,9 +31,7 @@ def round_to_four_decimals_with_decimal(value):
 
 def execute_value_chf_and_decimals(value_chf, expected, decimals, n):
     print('---------------------------------------------------')
-    print(f'CAS DE TEST {n}:')
-    print(f'montant_chf: {value_chf}')
-    print(f'decimals: {decimals}')
+    print(f'CAS DE TEST {n} | montant_chf: {value_chf} | decimals: {decimals}')
     print('---------------------------------------------------')
 
     bjm_round_down_val = bjm_round_down(value_chf, decimals)
@@ -44,9 +42,6 @@ def execute_value_chf_and_decimals(value_chf, expected, decimals, n):
 
     bjm_round_half_down_val = bjm_round_half_down(value_chf, decimals)
     print_result('bjm_round_half_down_val', bjm_round_half_down_val, expected)
-
-    # rounded_to_4 = round_to_four_decimals(value_chf)
-    # print_result('rounded_value', rounded_to_4, expected)
 
     rounded_to_4_decimal = round_to_four_decimals_with_decimal(value_chf)
     print_result('rounded_to_4_decimal', rounded_to_4_decimal, expected)
@@ -59,6 +54,5 @@ execute_value_chf_and_decimals(0.0095,0.0095, 4, 2)
 execute_value_chf_and_decimals(0.0094, 0.0094, 4, 3)
 execute_value_chf_and_decimals(0.009601, 0.0096, 4, 4)
 execute_value_chf_and_decimals(0.00967,0.0096, 4, 5)
-# aussi testé et fonctionnel:
-# execute_value_chf_and_decimals(0.009501, 4, 4)
-# execute_value_chf_and_decimals(0.009401, 4, 4)
+execute_value_chf_and_decimals(0.009501, 0.0095, 4, 6)
+execute_value_chf_and_decimals(0.009401, 0.0094, 4, 7)
