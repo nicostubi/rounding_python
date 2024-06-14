@@ -4,7 +4,9 @@ from rounds import bjm_round_down, bjm_round_half_up, bjm_round_half_down
 def print_result(method, result, expected):
     passed = '\u2714\ufe0f'
     if result != expected:
-        passed = '\u274c'
+        failed = '\u274c'
+        print(f'{method} => {result} {failed} (expected {expected})')
+        return
     print(f'{method} => {result} {passed}')
 
 
@@ -14,6 +16,17 @@ def round_to_four_decimals(value):
     # Formatte la valeur pour s'assurer qu'elle a toujours 4 décimales
     formatted_value = f"{temp_value:.4f}"
     return float(formatted_value)
+
+
+def round_to_four_decimals_with_decimal(value):
+    # Convertir la valeur en chaîne de caractères
+    value_str = str(value)
+    # Vérifier si la valeur a plus de quatre décimales
+    if '.' in value_str and len(value_str.split('.')[1]) > 4:
+        # slide des
+        return float(value_str[:value_str.find('.') + 5])
+    else:
+        return value
 
 
 def execute_value_chf_and_decimals(value_chf, expected, decimals, n):
@@ -32,8 +45,11 @@ def execute_value_chf_and_decimals(value_chf, expected, decimals, n):
     bjm_round_half_down_val = bjm_round_half_down(value_chf, decimals)
     print_result('bjm_round_half_down_val', bjm_round_half_down_val, expected)
 
-    rounded_to_4 = round_to_four_decimals(value_chf)
-    print_result('rounded_value', rounded_to_4, expected)
+    # rounded_to_4 = round_to_four_decimals(value_chf)
+    # print_result('rounded_value', rounded_to_4, expected)
+
+    rounded_to_4_decimal = round_to_four_decimals_with_decimal(value_chf)
+    print_result('rounded_to_4_decimal', rounded_to_4_decimal, expected)
 
 
 print('---------------------------------------------------')
